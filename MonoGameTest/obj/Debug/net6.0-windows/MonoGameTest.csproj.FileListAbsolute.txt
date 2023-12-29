@@ -38,3 +38,4 @@ D:\monoGames\MonoGameTest\MonoGameTest\obj\Debug\net6.0-windows\ref\MonoGameTest
 D:\monoGames\MonoGameTest\MonoGameTest\bin\Debug\net6.0-windows\Content\obama.xnb
 D:\monoGames\MonoGameTest\MonoGameTest\bin\Debug\net6.0-windows\Content\StardewTileMap.xnb
 D:\monoGames\MonoGameTest\MonoGameTest\bin\Debug\net6.0-windows\Content\Alex.xnb
+D:\monoGames\MonoGameTest\MonoGameTest\obj\Debug\net6.0-windows\MonoGameTest.sourcelink.json

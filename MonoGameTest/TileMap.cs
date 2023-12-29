@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MonoGameTest
 {
@@ -18,7 +14,7 @@ namespace MonoGameTest
 
         public TileMap()
         {
-            tileMapSource = GlobalAssetManager.getTexture("StardewTileMap");
+            tileMapSource = Globals.getTextureAndHold("StardewTileMap");
             origin = new(16, 16);
             rand = new Random();
             for (var x = 0; x < 32; x++)

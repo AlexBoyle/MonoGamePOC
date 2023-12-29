@@ -16,7 +16,7 @@ namespace MonoGameTest
         float deltaSinceSpriteUpdate = 0;
         int direction = 0;
         public Alex() {
-            sprite = new(GlobalAssetManager.getTexture("Alex"), Vector2.Zero);
+            sprite = new(Globals.getTextureAndHold("Alex"), Vector2.Zero);
         }
 
         float speed = 75.0f;

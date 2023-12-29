@@ -1,17 +1,9 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections;
-using System.Linq;
-using System.Diagnostics;
+﻿using System.Collections;
 
 namespace MonoGameTest
 {
     public class Game1 : Game
     {
-        int w; 
-        int h;
         Sprite obama;
         ArrayList GameObjects = new ArrayList();
         private GraphicsDeviceManager _graphics;
@@ -19,6 +11,7 @@ namespace MonoGameTest
         private TileMap tileMap;
         private Camera camera;
         GameObject mainCharacter;
+        MouseState lastMouseState = new();
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -30,46 +23,50 @@ namespace MonoGameTest
         {
             // TODO: Add your initialization logic here
             Globals.Content = Content;
-            
+            Globals.graphicsDevice = GraphicsDevice;
             tileMap = new();
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            w = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-            h = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
             camera = new Camera();
+            
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Globals.SpriteBatch = _spriteBatch;
             mainCharacter = new Alex();
+            
             GameObjects.Add(mainCharacter);
             
         }
 
         protected override void Update(GameTime gameTime)
         {
-            
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-               // System.Diagnostics.Debug.WriteLine(gameTime);
-            }
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+            if (Keyboard.GetState().IsKeyDown(Keys.A)){/* System.Diagnostics.Debug.WriteLine(gameTime); */}
 
-            // TODO: Add your update logic here
-            foreach(GameObject  gameObject in GameObjects)
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)) { Exit(); }
+
+            MouseState mouseState = Mouse.GetState();
+            float scrollDiff = mouseState.ScrollWheelValue - lastMouseState.ScrollWheelValue;
+            if(scrollDiff != 0)
+            {
+                camera.updateZoomBy(.001f * scrollDiff);
+                Debug.WriteLine(camera.zoom);
+            }
+
+            camera.centerCamera(mainCharacter.sprite.position);
+            foreach (GameObject  gameObject in GameObjects)
             {
                 gameObject.update(gameTime);
             }
+            lastMouseState = mouseState;
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            float zoom = 3f;
-            int width = GraphicsDevice.PresentationParameters.Bounds.Width;
-            int height = GraphicsDevice.PresentationParameters.Bounds.Height;
+            float zoom = 1f;
+            Vector2 screenSize = Globals.getwindowScreenSize();
             GraphicsDevice.Clear(Color.CornflowerBlue);
             Globals.SpriteBatch.Begin(
                 SpriteSortMode.BackToFront, 
@@ -78,10 +75,7 @@ namespace MonoGameTest
                 DepthStencilState.Default, 
                 RasterizerState.CullNone, 
                 null, 
-                Matrix.CreateScale(new Vector3(zoom, zoom, 1)) * 
-                Matrix.CreateTranslation(new Vector3(-mainCharacter.sprite.position.X* zoom, -mainCharacter.sprite.position.Y * zoom, 0)) *
-                //Matrix.CreateTranslation(new Vector3(0, 0, 0)) *
-                Matrix.CreateTranslation(new Vector3(width*.5f,height*.5f, 0)) 
+               camera.getCameraMatrix()
                 );
             tileMap.draw();
             foreach (GameObject gameObject in GameObjects)
