@@ -1,16 +1,17 @@
-﻿namespace MonoGameTest
+﻿namespace MonoGameTest.Utils
 {
     public class Camera
     {
-        public float maxZoomOut = .1f;
+        public float maxZoomOut = .5f;
         Vector2 centerLocation = Vector2.Zero;
         public float zoom { get; set; }
 
-        public void updateZoomBy(float zoomUpdate) { 
-            this.zoom += zoomUpdate; 
-            if(this.zoom < maxZoomOut)
+        public void updateZoomBy(float zoomUpdate)
+        {
+            zoom += zoomUpdate;
+            if (zoom < maxZoomOut)
             {
-                this.zoom = maxZoomOut;
+                zoom = maxZoomOut;
             }
         }
 
@@ -19,7 +20,7 @@
             zoom = 3f;
         }
 
-        public void centerCamera(Vector2 pos) { centerLocation = pos; }
+        public void centerCamera(Vector2 pos) { centerLocation = new(pos.X, pos.Y); }
 
         public Matrix getCameraMatrix()
         {

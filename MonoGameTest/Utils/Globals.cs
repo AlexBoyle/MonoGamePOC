@@ -1,13 +1,14 @@
 ﻿using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
-using System;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using System.Drawing;
 
 
-namespace MonoGameTest;
+
+
+namespace MonoGameTest.Utils;
 public static class Globals
 {
+
+    public static Texture2D whiteRectangle;
     public static float Time { get; private set; }
     public static float ElapsedTime { get; private set; }
     public static bool Slowed { get; set; } = true;
@@ -17,9 +18,19 @@ public static class Globals
     public static GraphicsDeviceManager graphicsDeviceManager { get; set; }
     public static SpriteBatch SpriteBatch { get; set; }
 
-    private static Dictionary<String, Texture2D> textureMap = new();
+    private static Dictionary<string, Texture2D> textureMap = new();
 
-    public static Texture2D getTextureAndHold(String name)
+    public static Texture2D getWhite()
+    {
+        if(whiteRectangle == null)
+        {
+            whiteRectangle = new Texture2D(Globals.graphicsDevice, 1, 1);
+            whiteRectangle.SetData(new[] { Color.White });
+        }
+        return whiteRectangle;
+    }
+
+    public static Texture2D getTextureAndHold(string name)
     {
         if (textureMap.ContainsKey(name))
         {
@@ -27,14 +38,14 @@ public static class Globals
         }
         else
         {
-            Texture2D texture = Globals.getTexture(name);
+            Texture2D texture = getTexture(name);
             textureMap[name] = texture;
             return texture;
         }
     }
-    public static Texture2D getTexture(String name)
+    public static Texture2D getTexture(string name)
     {
-        return Globals.Content.Load<Texture2D>(name);
+        return Content.Load<Texture2D>(name);
     }
 
     public static Vector2 getFullScreenSize()
@@ -46,19 +57,19 @@ public static class Globals
         return new(graphicsDevice.PresentationParameters.Bounds.Width, graphicsDevice.PresentationParameters.Bounds.Height);
     }
 
-    public static void switchToFullScreen(Boolean isborderless, Boolean shouldHardwareSwitch)
+    public static void switchToFullScreen(bool isborderless, bool shouldHardwareSwitch)
     {
         gameWindow.Position = new(0, 0);
         gameWindow.IsBorderless = isborderless;
         graphicsDeviceManager.HardwareModeSwitch = shouldHardwareSwitch;
-        graphicsDeviceManager.PreferredBackBufferWidth = (int)Globals.getFullScreenSize().X;
-        graphicsDeviceManager.PreferredBackBufferHeight = (int)Globals.getFullScreenSize().Y;
+        graphicsDeviceManager.PreferredBackBufferWidth = (int)getFullScreenSize().X;
+        graphicsDeviceManager.PreferredBackBufferHeight = (int)getFullScreenSize().Y;
         graphicsDeviceManager.ApplyChanges();
     }
 
 
     public static void Update(GameTime gt)
     {
-        
+
     }
 }

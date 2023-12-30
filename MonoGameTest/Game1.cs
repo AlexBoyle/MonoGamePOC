@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+
 
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -7,7 +8,7 @@ namespace MonoGameTest
     public class Game1 : Game
     {
         Sprite obama;
-        ArrayList GameObjects = new ArrayList();
+        ArrayList gameObjects = new ArrayList();
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private TileMap tileMap;
@@ -42,8 +43,8 @@ namespace MonoGameTest
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Globals.SpriteBatch = _spriteBatch;
             mainCharacter = new Alex();
-            
-            GameObjects.Add(mainCharacter);
+
+            gameObjects.Add(mainCharacter);
             
         }
 
@@ -57,15 +58,19 @@ namespace MonoGameTest
             float scrollDiff = mouseState.ScrollWheelValue - lastMouseState.ScrollWheelValue;
             if(scrollDiff != 0)
             {
-                camera.updateZoomBy(.001f * scrollDiff);
-                Debug.WriteLine(camera.zoom);
+                camera.updateZoomBy(.1f * (scrollDiff/120));
             }
 
-            camera.centerCamera(mainCharacter.sprite.position);
-            foreach (GameObject  gameObject in GameObjects)
+            
+
+            foreach (GameObject  gameObject in gameObjects)
             {
                 gameObject.update(gameTime);
             }
+            CollisionMaster.checkStaticCollisions();
+            camera.centerCamera(mainCharacter.position);
+
+
             lastMouseState = mouseState;
             base.Update(gameTime);
         }
@@ -82,12 +87,12 @@ namespace MonoGameTest
                 DepthStencilState.Default, 
                 RasterizerState.CullNone, 
                 null, 
-               camera.getCameraMatrix()
+                camera.getCameraMatrix()
                 );
-            tileMap.draw();
-            foreach (GameObject gameObject in GameObjects)
+            tileMap.draw(gameTime);
+            foreach (GameObject gameObject in gameObjects)
             {
-                gameObject.Draw(gameTime);
+                gameObject.draw(gameTime);
             }
             Globals.SpriteBatch.End();
             base.Draw(gameTime);

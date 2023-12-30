@@ -1,22 +1,22 @@
-﻿using SharpDX.Direct3D9;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework.Input;
-using System.Security.Policy;
-using System.Diagnostics;
+﻿using MonoGameTest.Utils;
 
-namespace MonoGameTest
+namespace MonoGameTest.GameObjects
 {
-    internal class Alex : GameObject
+    internal class Alex : Sprite
     {
         int pointCycle = 0;
         float deltaSinceSpriteUpdate = 0;
         int direction = 0;
-        public Alex() {
-            sprite = new(Globals.getTextureAndHold("SpriteMaps/Alex"), Vector2.Zero);
+        CollisionBox collisionBox;
+        Vector2 velocity = Vector2.Zero;
+
+        public Alex()
+        {
+            collisionBox = new(this, new(new(0, 0), new(16, 32)));
+            collisionBox.isStatic = false;
+            CollisionMaster.registerCollisionBox(collisionBox);
+            texture = Globals.getTextureAndHold("SpriteMaps/Alex");
+            this.position = new(10 * 16, 10 * 16);
         }
 
         float speed = 75.0f;
@@ -25,38 +25,38 @@ namespace MonoGameTest
         {
             float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
             bool isMoving = false;
-            Vector2 change = Vector2.Zero;
+            velocity = Vector2.Zero;
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
                 direction = 2;
-                change.Y = -1;
+                velocity.Y = -1;
                 isMoving = true;
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
                 direction = 0;
-                change.Y = 1;
+                velocity.Y = 1;
                 isMoving = true;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
                 direction = 3;
-                change.X =  -1;
-                change.Normalize();
+                velocity.X = -1;
+                velocity.Normalize();
                 isMoving = true;
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
                 direction = 1;
-                change.X = 1;
-                change.Normalize();
+                velocity.X = 1;
+                velocity.Normalize();
                 isMoving = true;
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
                 direction = 1;
-                change.X = 1;
-                change.Normalize();
+                velocity.X = 1;
+                velocity.Normalize();
                 isMoving = true;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.E))
@@ -84,11 +84,28 @@ namespace MonoGameTest
                 deltaSinceSpriteUpdate = 0;
                 pointCycle = 0;
             }
-            sprite.setSprite(pointCycle, direction);
-            //System.Diagnostics.Debug.WriteLine(change.X);
-            change *= speed * delta;
-            sprite.position += change;
+            setSprite(pointCycle, direction);
+            velocity *= speed * delta;
+            position += velocity;
+            if (velocity != Vector2.Zero)
+            {
+                collisionBox.updatePosition(position);
+            }
 
+        }
+
+        public override void draw(GameTime gameTime)
+        {
+            //Globals.SpriteBatch.Draw(Globals.getWhite(), collisionBox.bounds, Color.Aqua);
+            base.draw(gameTime);
+        }
+
+        public override void resolveEvent(Event evt) { 
+            if(evt == Event.Collision)
+            {
+                position -= velocity;
+                collisionBox.updatePosition(position);
+            }
         }
     }
 }

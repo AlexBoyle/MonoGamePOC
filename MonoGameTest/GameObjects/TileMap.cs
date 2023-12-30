@@ -1,19 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework.Graphics;
+using MonoGameTest.Utils;
+using SharpDX.Direct2D1;
 
-namespace MonoGameTest
+namespace MonoGameTest.GameObjects
 {
-    internal class TileMap
+    internal class TileMap : GameObject
     {
+
         Texture2D tileMapSource;
         protected Color color = Color.White;
         protected float rotation;
         public int tileSize = 16;
         Vector2 origin;
         Random rand;
-        int[,] tileType  = new int[32,32];
+        int[,] tileType = new int[32, 32];
+        List<CollisionBox> collisionBoxes = new List<CollisionBox>();
 
         public TileMap()
         {
+            
+
             tileMapSource = Globals.getTextureAndHold("SpriteMaps/StardewTileMap");
             origin = new(16, 16);
             rand = new Random();
@@ -22,33 +30,41 @@ namespace MonoGameTest
                 for (var y = 0; y < 32; y++)
                 {
                     tileType[x, y] = rand.Next(0, 4);
-             
+                    if ((x == 1 && y > 2 && y < 29) ||(x == 28 && y > 2 && y < 29) || (y == 2 && x > 2 && x < 29) || (y == 29 && x > 2 && x < 29))
+                    {
+                        CollisionBox collisionBox = new(this, new(new(x * tileSize, y * tileSize), new(16, 16)));
+                        collisionBoxes.Add(collisionBox);
+                        CollisionMaster.registerCollisionBox(collisionBox);
+                    }
+
                 }
             }
         }
 
-        public void draw()
+        public void update(GameTime gameTime) { }
+
+        public void draw(GameTime gameTime)
         {
             Rectangle[] wall = {getSprite(272, 288, 16, 64), getSprite(304, 256, 16, 16), getSprite(256, 256, 16, 16), getSprite(211, 256, 16, 16),
                 getSprite(192, 256, 16, 16), getSprite(240, 256, 16, 16), getSprite(288, 224, 16, 64), getSprite(320, 288, 16, 64)
             };
             Rectangle[] grass = { getSprite(0, 7), getSprite(0, 6), getSprite(1, 6), getSprite(2, 6) };
-            for (var x = 0; x < 32; x ++)
+            for (var x = 0; x < 32; x++)
             {
                 for (var y = 0; y < 32; y++)
                 {
-                    Vector2 position = new Vector2(x* tileSize, y* tileSize);
-                    Globals.SpriteBatch.Draw(tileMapSource, position, grass[tileType[x,y]], color, rotation, origin, 1, SpriteEffects.None, .3f);
+                    Vector2 position = new Vector2(x * tileSize, y * tileSize);
+                    Globals.SpriteBatch.Draw(tileMapSource, position, grass[tileType[x, y]], color, rotation, origin, 1, SpriteEffects.None, .3f);
                 }
             }
             for (var x = 0; x < 32; x++)
             {
                 for (var y = 0; y < 32; y++)
                 {
-                    Boolean shouldDraw = false;
+                    bool shouldDraw = false;
                     float layer = .2f;
                     int side = -1;
-                    if(x == 2 && y > 2 && y < 29)
+                    if (x == 2 && y > 2 && y < 29)
                     {
                         side = 1;
                     }
@@ -56,7 +72,7 @@ namespace MonoGameTest
                     {
                         side = 2;
                     }
-                    if(y == 2 && x > 2 && x < 29)
+                    if (y == 2 && x > 2 && x < 29)
                     {
                         side = 0;
                         layer += .05f;
@@ -64,10 +80,12 @@ namespace MonoGameTest
                     if (y == 29 && x > 2 && x < 29)
                     {
                         side = 3;
+                        layer = .05f;
                     }
-                    if(y == 29 && x == 2)
+                    if (y == 29 && x == 2)
                     {
                         side = 4;
+                        
                     }
                     if (y == 29 && x == 29)
                     {
@@ -76,7 +94,7 @@ namespace MonoGameTest
                     if (y == 2 && x == 3)
                     {
                         side = 6;
-                        
+
                     }
                     if (y == 2 && x == 28)
                     {
@@ -87,9 +105,16 @@ namespace MonoGameTest
                     {
                         Vector2 position = new Vector2(x * tileSize, y * tileSize);
                         Globals.SpriteBatch.Draw(tileMapSource, position, wall[side], color, rotation, origin, 1, SpriteEffects.None, layer);
+                        
                     }
                 }
             }
+            /*
+            foreach(CollisionBox col in collisionBoxes)
+            {
+                Globals.SpriteBatch.Draw(Globals.getWhite(), col.bounds,Color.Chocolate);
+            }
+            */
 
         }
 
