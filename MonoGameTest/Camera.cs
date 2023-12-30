@@ -16,7 +16,7 @@
 
         public Camera()
         {
-            zoom = 1f;
+            zoom = 3f;
         }
 
         public void centerCamera(Vector2 pos) { centerLocation = pos; }

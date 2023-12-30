@@ -5,8 +5,8 @@
   <Config />
   <SourceFiles>
     <File>D:/monoGames/MonoGameTest/MonoGameTest/Content/obama.jpg</File>
-    <File>D:/monoGames/MonoGameTest/MonoGameTest/Content/StardewTileMap.png</File>
-    <File>D:/monoGames/MonoGameTest/MonoGameTest/Content/Alex.png</File>
+    <File>D:/monoGames/MonoGameTest/MonoGameTest/Content/SpriteMaps/StardewTileMap.png</File>
+    <File>D:/monoGames/MonoGameTest/MonoGameTest/Content/SpriteMaps/Alex.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

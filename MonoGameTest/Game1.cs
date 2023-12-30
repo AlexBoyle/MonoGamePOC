@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
 namespace MonoGameTest
 {
     public class Game1 : Game
@@ -15,15 +17,20 @@ namespace MonoGameTest
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
+            Globals.graphicsDeviceManager = _graphics;
+            Globals.gameWindow = Window;
+            
+
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             Globals.Content = Content;
             Globals.graphicsDevice = GraphicsDevice;
+
+            Globals.switchToFullScreen(true, false);
             tileMap = new();
             base.Initialize();
         }

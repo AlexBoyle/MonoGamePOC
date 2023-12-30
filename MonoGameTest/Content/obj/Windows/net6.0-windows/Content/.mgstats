@@ -1,4 +1,4 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"D:/monoGames/MonoGameTest/MonoGameTest/Content/Alex.png","D:/monoGames/MonoGameTest/MonoGameTest/Content/bin/Windows/Content/Alex.xnb","TextureProcessor","Texture2DContent",52663,485057,0.0854107
-"D:/monoGames/MonoGameTest/MonoGameTest/Content/obama.jpg","D:/monoGames/MonoGameTest/MonoGameTest/Content/bin/Windows/Content/obama.xnb","TextureProcessor","Texture2DContent",78838,1000085,0.1637509
-"D:/monoGames/MonoGameTest/MonoGameTest/Content/StardewTileMap.png","D:/monoGames/MonoGameTest/MonoGameTest/Content/bin/Windows/Content/StardewTileMap.xnb","TextureProcessor","Texture2DContent",233478,2022485,0.1609798
+"D:/monoGames/MonoGameTest/MonoGameTest/Content/obama.jpg","D:/monoGames/MonoGameTest/MonoGameTest/Content/bin/Windows/Content/obama.xnb","TextureProcessor","Texture2DContent",78838,1000085,0.1113431
+"D:/monoGames/MonoGameTest/MonoGameTest/Content/SpriteMaps/Alex.png","D:/monoGames/MonoGameTest/MonoGameTest/Content/bin/Windows/Content/SpriteMaps/Alex.xnb","TextureProcessor","Texture2DContent",52663,485057,0.1289241
+"D:/monoGames/MonoGameTest/MonoGameTest/Content/SpriteMaps/StardewTileMap.png","D:/monoGames/MonoGameTest/MonoGameTest/Content/bin/Windows/Content/SpriteMaps/StardewTileMap.xnb","TextureProcessor","Texture2DContent",233478,2022485,0.0527417

@@ -1,19 +1,20 @@
 ﻿using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
 using System;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Drawing;
 
 
 namespace MonoGameTest;
 public static class Globals
 {
-    //public const int SCREEN_WIDTH = 1600;
-    //public const int SCREEN_HEIGHT = 900;
     public static float Time { get; private set; }
     public static float ElapsedTime { get; private set; }
     public static bool Slowed { get; set; } = true;
     public static ContentManager Content { get; set; }
-
+    public static GameWindow gameWindow { get; set; }
     public static GraphicsDevice graphicsDevice { get; set; }
+    public static GraphicsDeviceManager graphicsDeviceManager { get; set; }
     public static SpriteBatch SpriteBatch { get; set; }
 
     private static Dictionary<String, Texture2D> textureMap = new();
@@ -44,6 +45,17 @@ public static class Globals
     {
         return new(graphicsDevice.PresentationParameters.Bounds.Width, graphicsDevice.PresentationParameters.Bounds.Height);
     }
+
+    public static void switchToFullScreen(Boolean isborderless, Boolean shouldHardwareSwitch)
+    {
+        gameWindow.Position = new(0, 0);
+        gameWindow.IsBorderless = isborderless;
+        graphicsDeviceManager.HardwareModeSwitch = shouldHardwareSwitch;
+        graphicsDeviceManager.PreferredBackBufferWidth = (int)Globals.getFullScreenSize().X;
+        graphicsDeviceManager.PreferredBackBufferHeight = (int)Globals.getFullScreenSize().Y;
+        graphicsDeviceManager.ApplyChanges();
+    }
+
 
     public static void Update(GameTime gt)
     {

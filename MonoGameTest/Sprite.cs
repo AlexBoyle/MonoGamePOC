@@ -30,6 +30,6 @@ public class Sprite
 
     public virtual void Draw()
     {
-        Globals.SpriteBatch.Draw(texture, position, spriteIndex, color, rotation, Vector2.Zero, 1, SpriteEffects.None, 1);
+        Globals.SpriteBatch.Draw(texture, position, spriteIndex, color, rotation, Vector2.Zero, 1, SpriteEffects.None, .1f);
     }
 }
