@@ -20,6 +20,7 @@ public static class Globals
 
     private static Dictionary<string, Texture2D> textureMap = new();
 
+
     public static Texture2D getWhite()
     {
         if(whiteRectangle == null)
@@ -46,6 +47,11 @@ public static class Globals
     public static Texture2D getTexture(string name)
     {
         return Content.Load<Texture2D>(name);
+    }
+
+    public static SpriteFont getSpriteFont(string name)
+    {
+        return Content.Load<SpriteFont> (name);
     }
 
     public static Vector2 getFullScreenSize()

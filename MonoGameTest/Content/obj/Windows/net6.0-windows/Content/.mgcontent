@@ -4,12 +4,12 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>D:/monoGames/MonoGameTest/MonoGameTest/Content/obama.jpg</File>
-    <File>D:/monoGames/MonoGameTest/MonoGameTest/Content/SpriteMaps/StardewTileMap.png</File>
+    <File>D:/monoGames/MonoGameTest/MonoGameTest/Content/fonts/File.spritefont</File>
     <File>D:/monoGames/MonoGameTest/MonoGameTest/Content/SpriteMaps/Alex.png</File>
+    <File>D:/monoGames/MonoGameTest/MonoGameTest/Content/SpriteMaps/StardewTileMap.png</File>
   </SourceFiles>
   <DestFiles>
-    <File xsi:nil="true" />
+    <File>fonts/default.spritefont</File>
     <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>

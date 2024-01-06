@@ -1,0 +1,4 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"D:/monoGames/MonoGameTest/MonoGameTest/Content/fonts/File.spritefont","D:/monoGames/MonoGameTest/MonoGameTest/Content/bin/Windows/fonts/default.xnb","FontDescriptionProcessor","SpriteFontContent",2068,21535,0.1583178
+"D:/monoGames/MonoGameTest/MonoGameTest/Content/SpriteMaps/Alex.png","D:/monoGames/MonoGameTest/MonoGameTest/Content/bin/Windows/SpriteMaps/Alex.xnb","TextureProcessor","Texture2DContent",52663,485057,0.0240318
+"D:/monoGames/MonoGameTest/MonoGameTest/Content/SpriteMaps/StardewTileMap.png","D:/monoGames/MonoGameTest/MonoGameTest/Content/bin/Windows/SpriteMaps/StardewTileMap.xnb","TextureProcessor","Texture2DContent",233478,2022485,0.0598949

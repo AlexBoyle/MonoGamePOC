@@ -10,7 +10,7 @@
 
         public virtual void draw(GameTime gameTime) { }
 
-        public virtual void resolveEvent(Event evt) { }
+        public virtual void resolveEvent(Event evt, object details) { }
         public virtual void onDestroy() { }
 
     }

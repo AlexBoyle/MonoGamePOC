@@ -20,7 +20,7 @@
             zoom = 3f;
         }
 
-        public void centerCamera(Vector2 pos) { centerLocation = new(pos.X, pos.Y); }
+        public void centerCamera(Vector2 pos) { centerLocation = new((int)pos.X, (int)pos.Y); }
 
         public Matrix getCameraMatrix()
         {

@@ -31,7 +31,7 @@ namespace MonoGameTest
             Globals.Content = Content;
             Globals.graphicsDevice = GraphicsDevice;
 
-            Globals.switchToFullScreen(true, false);
+            //Globals.switchToFullScreen(true, false);
             tileMap = new();
             base.Initialize();
         }
@@ -52,7 +52,8 @@ namespace MonoGameTest
         {
             if (Keyboard.GetState().IsKeyDown(Keys.A)){/* System.Diagnostics.Debug.WriteLine(gameTime); */}
 
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)) { Exit(); }
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape)) { Exit(); }
+            if (Keyboard.GetState().IsKeyDown(Keys.F)) { Globals.switchToFullScreen(true, false); }
 
             MouseState mouseState = Mouse.GetState();
             float scrollDiff = mouseState.ScrollWheelValue - lastMouseState.ScrollWheelValue;
@@ -60,9 +61,6 @@ namespace MonoGameTest
             {
                 camera.updateZoomBy(.1f * (scrollDiff/120));
             }
-
-            
-
             foreach (GameObject  gameObject in gameObjects)
             {
                 gameObject.update(gameTime);

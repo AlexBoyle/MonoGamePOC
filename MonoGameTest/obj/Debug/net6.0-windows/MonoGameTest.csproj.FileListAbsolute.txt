@@ -35,8 +35,8 @@ D:\monoGames\MonoGameTest\MonoGameTest\obj\Debug\net6.0-windows\refint\MonoGameT
 D:\monoGames\MonoGameTest\MonoGameTest\obj\Debug\net6.0-windows\MonoGameTest.pdb
 D:\monoGames\MonoGameTest\MonoGameTest\obj\Debug\net6.0-windows\MonoGameTest.genruntimeconfig.cache
 D:\monoGames\MonoGameTest\MonoGameTest\obj\Debug\net6.0-windows\ref\MonoGameTest.dll
-D:\monoGames\MonoGameTest\MonoGameTest\bin\Debug\net6.0-windows\Content\obama.xnb
 D:\monoGames\MonoGameTest\MonoGameTest\bin\Debug\net6.0-windows\Content\StardewTileMap.xnb
 D:\monoGames\MonoGameTest\MonoGameTest\obj\Debug\net6.0-windows\MonoGameTest.sourcelink.json
 D:\monoGames\MonoGameTest\MonoGameTest\bin\Debug\net6.0-windows\Content\SpriteMaps\Alex.xnb
 D:\monoGames\MonoGameTest\MonoGameTest\bin\Debug\net6.0-windows\Content\SpriteMaps\StardewTileMap.xnb
+D:\monoGames\MonoGameTest\MonoGameTest\bin\Debug\net6.0-windows\Content\fonts\default.xnb

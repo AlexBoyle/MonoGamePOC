@@ -25,6 +25,7 @@ namespace MonoGameTest.GameObjects
             tileMapSource = Globals.getTextureAndHold("SpriteMaps/StardewTileMap");
             origin = new(16, 16);
             rand = new Random();
+            int id = 0;
             for (var x = 0; x < 32; x++)
             {
                 for (var y = 0; y < 32; y++)
@@ -32,13 +33,18 @@ namespace MonoGameTest.GameObjects
                     tileType[x, y] = rand.Next(0, 4);
                     if ((x == 1 && y > 2 && y < 29) ||(x == 28 && y > 2 && y < 29) || (y == 2 && x > 2 && x < 29) || (y == 29 && x > 2 && x < 29))
                     {
+                        id++;
                         CollisionBox collisionBox = new(this, new(new(x * tileSize, y * tileSize), new(16, 16)));
+                        collisionBox.id = id;
                         collisionBoxes.Add(collisionBox);
                         CollisionMaster.registerCollisionBox(collisionBox);
                     }
 
                 }
             }
+            CollisionBox extra = new(this, new(new(10 * tileSize, 15 * tileSize), new(16, 16)));
+            CollisionMaster.registerCollisionBox(extra);
+            collisionBoxes.Add(extra);
         }
 
         public void update(GameTime gameTime) { }
@@ -109,12 +115,12 @@ namespace MonoGameTest.GameObjects
                     }
                 }
             }
-            /*
+            
             foreach(CollisionBox col in collisionBoxes)
             {
                 Globals.SpriteBatch.Draw(Globals.getWhite(), col.bounds,Color.Chocolate);
             }
-            */
+            
 
         }
 

@@ -8,9 +8,14 @@ namespace MonoGameTest.Utils
         static List<CollisionBox> staticCollisionBoxes = new();
         static List<CollisionBox> dynamicCollisionBoxes = new(); 
 
+        private static Rectangle getOverlap(Rectangle r1, Rectangle r2)
+        {
+            return Rectangle.Intersect(r1, r2);
+        }
+
         private static Boolean areRectanglesOverlapping(Rectangle r1, Rectangle r2)
         {
-            //return !(Rectangle.Intersect(r1, r2).IsEmpty);
+            
             return 
                 !(r1.Left > r2.Left + r2.Width) &&
                 !(r1.Left + r1.Width < r2.Left) &&
@@ -46,11 +51,10 @@ namespace MonoGameTest.Utils
                 {
                     if (Vector2.Distance(dynamicCollisionBox.origin, staticCollisionBox.origin) < dynamicCollisionBox.maxDistanceForCollision + staticCollisionBox.maxDistanceForCollision)
                     {
-                        
-                        if (areRectanglesOverlapping(dynamicCollisionBox.bounds, staticCollisionBox.bounds))
+                        Rectangle overlap = getOverlap(dynamicCollisionBox.bounds, staticCollisionBox.bounds);
+                        if (!(overlap.IsEmpty))
                         {
-                            
-                            dynamicCollisionBox.resolveCollision();
+                            dynamicCollisionBox.resolveCollision(staticCollisionBox);
                         }
                     }
                 }
