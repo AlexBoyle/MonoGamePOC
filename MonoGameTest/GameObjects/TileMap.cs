@@ -42,7 +42,7 @@ namespace MonoGameTest.GameObjects
 
                 }
             }
-            CollisionBox extra = new(this, new(new(10 * tileSize, 15 * tileSize), new(16, 16)));
+            CollisionBox extra = new(this, new(new(10 * tileSize, 15 * tileSize), new(16, 16)));//15*16 = 240
             CollisionMaster.registerCollisionBox(extra);
             collisionBoxes.Add(extra);
         }

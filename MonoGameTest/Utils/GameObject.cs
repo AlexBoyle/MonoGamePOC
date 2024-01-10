@@ -1,4 +1,5 @@
-﻿namespace MonoGameTest.Utils
+﻿using System.Collections.Generic;
+namespace MonoGameTest.Utils
 {
 
     public class GameObject
@@ -11,6 +12,7 @@
         public virtual void draw(GameTime gameTime) { }
 
         public virtual void resolveEvent(Event evt, object details) { }
+        public virtual void resolveEvents(Event evt, object details) { }
         public virtual void onDestroy() { }
 
     }
