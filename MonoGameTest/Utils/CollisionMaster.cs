@@ -35,7 +35,7 @@ namespace MonoGameTest.Utils
         {
             foreach (CollisionBox dynamicCollisionBox in dynamicCollisionBoxes)
             {
-                List < CollisionEvent > collisionsToResolve = new();
+                List<CollisionEvent> collisionsToResolve = new();
                 foreach (CollisionBox staticCollisionBox in staticCollisionBoxes)
                 {
                     if (Vector2.Distance(dynamicCollisionBox.origin, staticCollisionBox.origin) < dynamicCollisionBox.maxDistanceForCollision + staticCollisionBox.maxDistanceForCollision)
@@ -44,12 +44,14 @@ namespace MonoGameTest.Utils
                         if (!(overlap.IsEmpty))
                         {
                             collisionsToResolve.Add(new(dynamicCollisionBox, staticCollisionBox));
-                            
+
                         }
                     }
                 }
-                if(collisionsToResolve.Count > 0)
+                if (collisionsToResolve.Count > 0) { 
+                    Debug.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                     dynamicCollisionBox.resolveCollisions(collisionsToResolve);
+                }
             }
         }
 

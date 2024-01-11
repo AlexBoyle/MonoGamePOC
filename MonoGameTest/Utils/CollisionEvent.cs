@@ -21,16 +21,30 @@ namespace MonoGameTest.Utils
         {
             this.collisionEvents = collisionEvents;
             Vector2 totalDepth = Vector2.Zero;
+            Vector2 totalDepth1 = Vector2.Zero;
             foreach(CollisionEvent collisionEvent in collisionEvents) 
             {
+                Vector2 depthSign = new(
+                    Math.Abs(totalDepth1.X) < Math.Abs(collisionEvent.depth.X) && totalDepth1.X  != 0? Math.Sign(totalDepth1.X) : Math.Sign(collisionEvent.depth.X),
+                    Math.Abs(totalDepth1.Y) < Math.Abs(collisionEvent.depth.Y) && totalDepth1.Y != 0 ? Math.Sign(totalDepth1.Y) : Math.Sign(collisionEvent.depth.Y)
+                );
+                Debug.Write("Sign: ");
+                Debug.WriteLine(depthSign);
                 totalDepth += collisionEvent.depth;
-                Debug.WriteLine(collisionEvent.depth);
+                totalDepth1 = new(Math.Abs(totalDepth1.X) + Math.Abs(collisionEvent.depth.X), Math.Abs((totalDepth1.Y)) + Math.Abs(collisionEvent.depth.Y));
+                totalDepth1 *= depthSign;
+                
                 if (collisionEvent.top) { allignToTop = collisionEvent.allignToTop; }
                 if (collisionEvent.bottom) { allignToBottom = collisionEvent.allignToBottom; }
                 if (collisionEvent.left) { allignToLeft = collisionEvent.allignToLeft; }
                 if (collisionEvent.right) { allignToRight = collisionEvent.allignToRight; }
             }
+            Debug.Write("Ex Depth:");
+            Debug.WriteLine(totalDepth1);
+            Debug.Write("Depth:");
+            Debug.WriteLine(totalDepth);
             this.depth = totalDepth;
+            this.depth = totalDepth1;
             updateCollisionLocations();
 
         }
