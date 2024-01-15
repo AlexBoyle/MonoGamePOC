@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGameTest.Utils;
+using MonoGameTest.Physics;
 using SharpDX.Direct2D1;
 
 namespace MonoGameTest.GameObjects
@@ -31,7 +31,7 @@ namespace MonoGameTest.GameObjects
                 for (var y = 0; y < 32; y++)
                 {
                     tileType[x, y] = rand.Next(0, 4);
-                    if ((x == 1 && y > 2 && y < 29) ||(x == 28 && y > 2 && y < 29) || (y == 2 && x > 2 && x < 29) || (y == 29 && x > 2 && x < 29))
+                    if ((x == 1 && y > 2 && y < 29) ||(x == 28 && y > 2 && y < 29) || (y == 3 && x > 1 && x < 28) || (y == 29 && x >1 && x < 28))
                     {
                         id++;
                         CollisionBox collisionBox = new(this, new(new(x * tileSize, y * tileSize), new(16, 16)));
@@ -42,9 +42,6 @@ namespace MonoGameTest.GameObjects
 
                 }
             }
-            CollisionBox extra = new(this, new(new(10 * tileSize, 15 * tileSize), new(16, 16)));//15*16 = 240
-            CollisionMaster.registerCollisionBox(extra);
-            collisionBoxes.Add(extra);
         }
 
         public void update(GameTime gameTime) { }
@@ -115,10 +112,12 @@ namespace MonoGameTest.GameObjects
                     }
                 }
             }
-            
-            foreach(CollisionBox col in collisionBoxes)
+            if (Globals.showHitboxes)
             {
-                Globals.SpriteBatch.Draw(Globals.getWhite(), col.bounds,Color.Chocolate);
+                foreach (CollisionBox col in collisionBoxes)
+                {
+                    Globals.SpriteBatch.Draw(Globals.getWhite(), col.bounds, Color.Chocolate);
+                }
             }
             
 

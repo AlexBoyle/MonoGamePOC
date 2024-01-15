@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MonoGameTest.Utils
+namespace MonoGameTest.Physics
 {
     public static class CollisionMaster
     {
         static List<CollisionBox> staticCollisionBoxes = new();
-        static List<CollisionBox> dynamicCollisionBoxes = new(); 
+        static List<CollisionBox> dynamicCollisionBoxes = new();
 
         private static Rectangle getOverlap(Rectangle r1, Rectangle r2)
         {
@@ -15,7 +15,7 @@ namespace MonoGameTest.Utils
 
         public static int registerCollisionBox(CollisionBox collisionBox)
         {
-            if(collisionBox.isStatic)
+            if (collisionBox.isStatic)
             {
                 staticCollisionBoxes.Add(collisionBox);
             }
@@ -41,15 +41,15 @@ namespace MonoGameTest.Utils
                     if (Vector2.Distance(dynamicCollisionBox.origin, staticCollisionBox.origin) < dynamicCollisionBox.maxDistanceForCollision + staticCollisionBox.maxDistanceForCollision)
                     {
                         Rectangle overlap = getOverlap(dynamicCollisionBox.bounds, staticCollisionBox.bounds);
-                        if (!(overlap.IsEmpty))
+                        if (!overlap.IsEmpty)
                         {
                             collisionsToResolve.Add(new(dynamicCollisionBox, staticCollisionBox));
 
                         }
                     }
                 }
-                if (collisionsToResolve.Count > 0) { 
-                    Debug.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                if (collisionsToResolve.Count > 0)
+                {
                     dynamicCollisionBox.resolveCollisions(collisionsToResolve);
                 }
             }

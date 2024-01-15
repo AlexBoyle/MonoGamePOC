@@ -12,6 +12,8 @@ public static class Globals
     public static float Time { get; private set; }
     public static float ElapsedTime { get; private set; }
     public static bool Slowed { get; set; } = true;
+    public static bool showHitboxes { get; set; } = false;
+
     public static ContentManager Content { get; set; }
     public static GameWindow gameWindow { get; set; }
     public static GraphicsDevice graphicsDevice { get; set; }

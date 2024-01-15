@@ -1,6 +1,7 @@
 ﻿
 
 
+using MonoGameTest.Physics;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MonoGameTest
@@ -52,7 +53,7 @@ namespace MonoGameTest
         {
             if (Keyboard.GetState().IsKeyDown(Keys.A)){/* System.Diagnostics.Debug.WriteLine(gameTime); */}
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape)) { Exit(); }
+            if (Keyboard.GetState().IsKeyDown(Keys.Back)) { Exit(); }
             if (Keyboard.GetState().IsKeyDown(Keys.F)) { Globals.switchToFullScreen(true, false); }
 
             MouseState mouseState = Mouse.GetState();

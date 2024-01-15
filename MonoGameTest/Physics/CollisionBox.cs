@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MonoGameTest.Utils
+namespace MonoGameTest.Physics
 {
     public class CollisionBox
     {
@@ -15,19 +15,20 @@ namespace MonoGameTest.Utils
         public Vector2 origin;
         public bool isStatic = true;
         public GameObject parent;
-        public Vector2[] points = { new(), new(), new(), new()};
+        public Vector2[] points = { new(), new(), new(), new() };
 
-        public CollisionBox(GameObject parent, Rectangle bounds) { 
+        public CollisionBox(GameObject parent, Rectangle bounds)
+        {
             this.parent = parent;
             this.bounds = bounds;
             updatePosition(bounds.Location);
         }
 
-        private Boolean ccw(Vector2 a, Vector2 b, Vector2 c)
+        private bool ccw(Vector2 a, Vector2 b, Vector2 c)
         {
             return (c.Y - a.Y) * (b.X - a.X) > (b.Y - a.Y) * (c.X - a.X);
         }
-        private Boolean doesIntersect(Vector2[] l1, Vector2[] l2)
+        private bool doesIntersect(Vector2[] l1, Vector2[] l2)
         {
 
             return ccw(l1[0], l2[0], l2[1]) != ccw(l1[1], l2[0], l2[1]) && ccw(l1[0], l1[1], l2[0]) != ccw(l1[0], l1[1], l2[1]);
@@ -44,9 +45,9 @@ namespace MonoGameTest.Utils
         }
         public void updatePosition(Point pos)
         {
-            bounds.Location = new((int)pos.X, (int)pos.Y);
-            maxDistanceForCollision = (float)Math.Sqrt((bounds.Width * bounds.Width) + (bounds.Height * bounds.Height));
-            origin = new(bounds.Left + (bounds.Width / 2f), bounds.Top + (bounds.Height / 2f));
+            bounds.Location = new(pos.X, pos.Y);
+            maxDistanceForCollision = (float)Math.Sqrt(bounds.Width * bounds.Width + bounds.Height * bounds.Height);
+            origin = new(bounds.Left + bounds.Width / 2f, bounds.Top + bounds.Height / 2f);
             points[0] = new(bounds.Left, bounds.Top);
             points[1] = new(bounds.Left + bounds.Width, bounds.Top);
             points[2] = new(bounds.Left + bounds.Width, bounds.Top + bounds.Height);

@@ -1,6 +1,6 @@
-﻿using MonoGameTest.Utils;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Collections.Generic;
+using MonoGameTest.Physics;
 namespace MonoGameTest.GameObjects
 {
     internal class Alex : Sprite
@@ -109,11 +109,11 @@ namespace MonoGameTest.GameObjects
 
         public override void draw(GameTime gameTime)
         {
-            Globals.SpriteBatch.DrawString( Globals.getSpriteFont("fonts/default"), "Vel: " + formatFloat(velocity.X) + " : " + formatFloat(velocity.Y), new Vector2(collisionBox.bounds.X, collisionBox.bounds.Y - 90), Color.Black);
-            Globals.SpriteBatch.DrawString( Globals.getSpriteFont("fonts/default"), "LastCol: " + lastCol, new Vector2(collisionBox.bounds.X, collisionBox.bounds.Y - 75), Color.Black);
-            Globals.SpriteBatch.DrawString( Globals.getSpriteFont("fonts/default"), "x: "  + formatFloat(position.X) + " :" + formatFloat(position.Y), new Vector2(collisionBox.bounds.X, collisionBox.bounds.Y - 60), Color.Black);
-            Globals.SpriteBatch.DrawString( Globals.getSpriteFont("fonts/default"), "x: "  + collisionBox.bounds.X + "      :" + collisionBox.bounds.Y, new Vector2(collisionBox.bounds.X, collisionBox.bounds.Y - 45), Color.Black);
-            Globals.SpriteBatch.Draw(Globals.getWhite(), collisionBox.bounds,  Color.Aqua);
+            //Globals.SpriteBatch.DrawString( Globals.getSpriteFont("fonts/default"), "Vel: " + formatFloat(velocity.X) + " : " + formatFloat(velocity.Y), new Vector2(collisionBox.bounds.X, collisionBox.bounds.Y - 90), Color.Black);
+            //Globals.SpriteBatch.DrawString( Globals.getSpriteFont("fonts/default"), "LastCol: " + lastCol, new Vector2(collisionBox.bounds.X, collisionBox.bounds.Y - 75), Color.Black);
+            //Globals.SpriteBatch.DrawString( Globals.getSpriteFont("fonts/default"), "x: "  + formatFloat(position.X) + " :" + formatFloat(position.Y), new Vector2(collisionBox.bounds.X, collisionBox.bounds.Y - 60), Color.Black);
+            //Globals.SpriteBatch.DrawString( Globals.getSpriteFont("fonts/default"), "x: "  + collisionBox.bounds.X + "      :" + collisionBox.bounds.Y, new Vector2(collisionBox.bounds.X, collisionBox.bounds.Y - 45), Color.Black);
+            if (Globals.showHitboxes) { Globals.SpriteBatch.Draw(Globals.getWhite(), collisionBox.bounds, Color.Aqua); }
             base.draw(gameTime);
         }
 
@@ -130,7 +130,7 @@ namespace MonoGameTest.GameObjects
             if(evt == Event.Collision)
             {
                 CollisionEvent collisionEvent = (CollisionEvent)d;
-                Debug.WriteLine(collisionEvent.toString());
+                //Debug.WriteLine(collisionEvent.toString());
                 if (collisionEvent.top) {
                     float diff = position.Y - velocity.Y;
                     if ((int)diff != collisionEvent.allignToTop) { 
@@ -140,9 +140,6 @@ namespace MonoGameTest.GameObjects
                     lastCol = "Top"; 
                 }
                 if (collisionEvent.bottom) {
-                    Debug.WriteLine("Bottom:");
-                    Debug.WriteLine(collisionEvent.allignToBottom);
-                    Debug.WriteLine(collisionEvent.depth);
                     float diff = position.Y - velocity.Y;
                     if ((int)diff + collisionBox.bounds.Height + collisionOffset.Y != collisionEvent.allignToBottom) {
                         diff = collisionEvent.allignToBottom - collisionBox.bounds.Height - collisionOffset.Y; 
