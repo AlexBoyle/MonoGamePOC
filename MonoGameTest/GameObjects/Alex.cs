@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.Collections.Generic;
 using MonoGameTest.Physics;
+using MonoGameTest.Core;
 namespace MonoGameTest.GameObjects
 {
     internal class Alex : Sprite

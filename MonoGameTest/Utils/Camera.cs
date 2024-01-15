@@ -1,4 +1,6 @@
-﻿namespace MonoGameTest.Utils
+﻿using MonoGameTest.Core;
+
+namespace MonoGameTest.Utils
 {
     public class Camera
     {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGameTest.Core;
 using MonoGameTest.Physics;
 using SharpDX.Direct2D1;
 

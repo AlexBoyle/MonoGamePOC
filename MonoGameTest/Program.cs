@@ -1,2 +1,3 @@
-﻿using var game = new MonoGameTest.Game1();
+﻿Debug.WriteLine("Starting Game");
+using var game = new MonoGameTest.Core.Game();
 game.Run();

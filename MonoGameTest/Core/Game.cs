@@ -1,12 +1,9 @@
-﻿
-
-
-using MonoGameTest.Physics;
+﻿using MonoGameTest.Physics;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace MonoGameTest
+namespace MonoGameTest.Core
 {
-    public class Game1 : Game
+    public class Game : Microsoft.Xna.Framework.Game
     {
         Sprite obama;
         ArrayList gameObjects = new ArrayList();
@@ -16,12 +13,12 @@ namespace MonoGameTest
         private Camera camera;
         GameObject mainCharacter;
         MouseState lastMouseState = new();
-        public Game1()
+        public Game()
         {
             _graphics = new GraphicsDeviceManager(this);
             Globals.graphicsDeviceManager = _graphics;
             Globals.gameWindow = Window;
-            
+
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -40,29 +37,29 @@ namespace MonoGameTest
         protected override void LoadContent()
         {
             camera = new Camera();
-            
+
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Globals.SpriteBatch = _spriteBatch;
             mainCharacter = new Alex();
 
             gameObjects.Add(mainCharacter);
-            
+
         }
 
         protected override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.A)){/* System.Diagnostics.Debug.WriteLine(gameTime); */}
+            if (Keyboard.GetState().IsKeyDown(Keys.A)) {/* System.Diagnostics.Debug.WriteLine(gameTime); */}
 
             if (Keyboard.GetState().IsKeyDown(Keys.Back)) { Exit(); }
             if (Keyboard.GetState().IsKeyDown(Keys.F)) { Globals.switchToFullScreen(true, false); }
 
             MouseState mouseState = Mouse.GetState();
             float scrollDiff = mouseState.ScrollWheelValue - lastMouseState.ScrollWheelValue;
-            if(scrollDiff != 0)
+            if (scrollDiff != 0)
             {
-                camera.updateZoomBy(.1f * (scrollDiff/120));
+                camera.updateZoomBy(.1f * (scrollDiff / 120));
             }
-            foreach (GameObject  gameObject in gameObjects)
+            foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.update(gameTime);
             }
@@ -80,12 +77,12 @@ namespace MonoGameTest
             Vector2 screenSize = Globals.getwindowScreenSize();
             GraphicsDevice.Clear(Color.CornflowerBlue);
             Globals.SpriteBatch.Begin(
-                SpriteSortMode.BackToFront, 
-                BlendState.NonPremultiplied, 
-                SamplerState.PointClamp, 
-                DepthStencilState.Default, 
-                RasterizerState.CullNone, 
-                null, 
+                SpriteSortMode.BackToFront,
+                BlendState.NonPremultiplied,
+                SamplerState.PointClamp,
+                DepthStencilState.Default,
+                RasterizerState.CullNone,
+                null,
                 camera.getCameraMatrix()
                 );
             tileMap.draw(gameTime);
