@@ -1,7 +1,6 @@
 ﻿using System.Globalization;
 using System.Collections.Generic;
-using MonoGameTest.Physics;
-using MonoGameTest.Core;
+
 namespace MonoGameTest.GameObjects
 {
     internal class Alex : Sprite
@@ -114,7 +113,7 @@ namespace MonoGameTest.GameObjects
             //Globals.SpriteBatch.DrawString( Globals.getSpriteFont("fonts/default"), "LastCol: " + lastCol, new Vector2(collisionBox.bounds.X, collisionBox.bounds.Y - 75), Color.Black);
             //Globals.SpriteBatch.DrawString( Globals.getSpriteFont("fonts/default"), "x: "  + formatFloat(position.X) + " :" + formatFloat(position.Y), new Vector2(collisionBox.bounds.X, collisionBox.bounds.Y - 60), Color.Black);
             //Globals.SpriteBatch.DrawString( Globals.getSpriteFont("fonts/default"), "x: "  + collisionBox.bounds.X + "      :" + collisionBox.bounds.Y, new Vector2(collisionBox.bounds.X, collisionBox.bounds.Y - 45), Color.Black);
-            if (Globals.showHitboxes) { Globals.SpriteBatch.Draw(Globals.getWhite(), collisionBox.bounds, Color.Aqua); }
+            if (Globals.showHitboxes) { Globals.SpriteBatch.Draw(DebugResorce.whiteRectangle, collisionBox.bounds, Color.Aqua); }
             base.draw(gameTime);
         }
 

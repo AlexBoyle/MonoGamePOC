@@ -7,31 +7,21 @@ using System.Collections.Generic;
 namespace MonoGameTest.Core;
 public static class Globals
 {
-
-    public static Texture2D whiteRectangle;
     public static float Time { get; private set; }
     public static float ElapsedTime { get; private set; }
     public static bool Slowed { get; set; } = true;
     public static bool showHitboxes { get; set; } = false;
-
     public static ContentManager Content { get; set; }
     public static GameWindow gameWindow { get; set; }
     public static GraphicsDevice graphicsDevice { get; set; }
     public static GraphicsDeviceManager graphicsDeviceManager { get; set; }
     public static SpriteBatch SpriteBatch { get; set; }
+    public static RenderTarget2D RenderTarget { get; set; }
 
     private static Dictionary<string, Texture2D> textureMap = new();
 
 
-    public static Texture2D getWhite()
-    {
-        if (whiteRectangle == null)
-        {
-            whiteRectangle = new Texture2D(graphicsDevice, 1, 1);
-            whiteRectangle.SetData(new[] { Color.White });
-        }
-        return whiteRectangle;
-    }
+    
 
     public static Texture2D getTextureAndHold(string name)
     {

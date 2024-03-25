@@ -52,7 +52,6 @@ namespace MonoGameTest.Physics
             points[1] = new(bounds.Left + bounds.Width, bounds.Top);
             points[2] = new(bounds.Left + bounds.Width, bounds.Top + bounds.Height);
             points[3] = new(bounds.Left, bounds.Top + bounds.Height);
-
         }
 
         public float getTopAlignemnt()

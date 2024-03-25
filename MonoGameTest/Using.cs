@@ -5,3 +5,5 @@ global using System.Diagnostics;
 global using System.Collections;
 global using MonoGameTest.GameObjects;
 global using MonoGameTest.Utils;
+global using MonoGameTest.Physics;
+global using MonoGameTest.Core;

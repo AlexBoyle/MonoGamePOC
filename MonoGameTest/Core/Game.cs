@@ -1,96 +1,56 @@
-﻿using MonoGameTest.Physics;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+﻿using System.Collections.Generic;
 
 namespace MonoGameTest.Core
 {
     public class Game : Microsoft.Xna.Framework.Game
-    {
-        Sprite obama;
-        ArrayList gameObjects = new ArrayList();
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
-        private TileMap tileMap;
-        private Camera camera;
-        GameObject mainCharacter;
-        MouseState lastMouseState = new();
+    {   
+        private Scene currentScene = null;
+
         public Game()
         {
-            _graphics = new GraphicsDeviceManager(this);
-            Globals.graphicsDeviceManager = _graphics;
+            Globals.graphicsDeviceManager = new GraphicsDeviceManager(this);
             Globals.gameWindow = Window;
-
-
+            List<Scene> scenes = new();
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
 
         protected override void Initialize()
         {
-            Globals.Content = Content;
-            Globals.graphicsDevice = GraphicsDevice;
-
-            //Globals.switchToFullScreen(true, false);
-            tileMap = new();
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            camera = new Camera();
+            Globals.Content = Content;
+            Globals.graphicsDevice = GraphicsDevice;
+            Globals.SpriteBatch = new SpriteBatch(GraphicsDevice);
+            Globals.RenderTarget = new RenderTarget2D(Globals.graphicsDevice, (int)Globals.getwindowScreenSize().X, (int)Globals.getwindowScreenSize().Y, false, Globals.graphicsDevice.PresentationParameters.BackBufferFormat, DepthFormat.Depth24);
 
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
-            Globals.SpriteBatch = _spriteBatch;
-            mainCharacter = new Alex();
 
-            gameObjects.Add(mainCharacter);
-
+            currentScene = new Scenes.TestScene();
         }
 
         protected override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.A)) {/* System.Diagnostics.Debug.WriteLine(gameTime); */}
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Back)) { Exit(); }
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape)) { Exit(); }
             if (Keyboard.GetState().IsKeyDown(Keys.F)) { Globals.switchToFullScreen(true, false); }
 
-            MouseState mouseState = Mouse.GetState();
-            float scrollDiff = mouseState.ScrollWheelValue - lastMouseState.ScrollWheelValue;
-            if (scrollDiff != 0)
+            if (currentScene != null)
             {
-                camera.updateZoomBy(.1f * (scrollDiff / 120));
+                currentScene.update(gameTime);
             }
-            foreach (GameObject gameObject in gameObjects)
-            {
-                gameObject.update(gameTime);
-            }
-            CollisionMaster.checkStaticCollisions();
-            camera.centerCamera(mainCharacter.position);
 
-
-            lastMouseState = mouseState;
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            float zoom = 1f;
-            Vector2 screenSize = Globals.getwindowScreenSize();
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-            Globals.SpriteBatch.Begin(
-                SpriteSortMode.BackToFront,
-                BlendState.NonPremultiplied,
-                SamplerState.PointClamp,
-                DepthStencilState.Default,
-                RasterizerState.CullNone,
-                null,
-                camera.getCameraMatrix()
-                );
-            tileMap.draw(gameTime);
-            foreach (GameObject gameObject in gameObjects)
+            if(currentScene != null)
             {
-                gameObject.draw(gameTime);
+                currentScene.draw(gameTime);
             }
-            Globals.SpriteBatch.End();
+
             base.Draw(gameTime);
         }
     }

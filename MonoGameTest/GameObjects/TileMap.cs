@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework.Graphics;
-using MonoGameTest.Core;
-using MonoGameTest.Physics;
-using SharpDX.Direct2D1;
 
 namespace MonoGameTest.GameObjects
 {
@@ -45,9 +41,9 @@ namespace MonoGameTest.GameObjects
             }
         }
 
-        public void update(GameTime gameTime) { }
+        public override void update(GameTime gameTime) { }
 
-        public void draw(GameTime gameTime)
+        public override void draw(GameTime gameTime)
         {
             Rectangle[] wall = {getSprite(272, 288, 16, 64), getSprite(304, 256, 16, 16), getSprite(256, 256, 16, 16), getSprite(211, 256, 16, 16),
                 getSprite(192, 256, 16, 16), getSprite(240, 256, 16, 16), getSprite(288, 224, 16, 64), getSprite(320, 288, 16, 64)
@@ -117,7 +113,7 @@ namespace MonoGameTest.GameObjects
             {
                 foreach (CollisionBox col in collisionBoxes)
                 {
-                    Globals.SpriteBatch.Draw(Globals.getWhite(), col.bounds, Color.Chocolate);
+                    Globals.SpriteBatch.Draw(DebugResorce.whiteRectangle, col.bounds, Color.Chocolate);
                 }
             }
             

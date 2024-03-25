@@ -20,7 +20,6 @@ namespace MonoGameTest.Physics
         public CollisionEvent(List<CollisionEvent> collisionEvents)
         {
             this.collisionEvents = collisionEvents;
-
             Vector2 totalDepth = Vector2.Zero;
             foreach (CollisionEvent collisionEvent in collisionEvents)
             {
@@ -36,10 +35,8 @@ namespace MonoGameTest.Physics
                 if (collisionEvent.left) { allignToLeft = collisionEvent.allignToLeft; }
                 if (collisionEvent.right) { allignToRight = collisionEvent.allignToRight; }
             }
-
             depth = totalDepth;
             updateCollisionLocations();
-
         }
         public CollisionEvent(CollisionBox c1, CollisionBox c2)
         {

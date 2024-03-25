@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography.Xml;
 using MonoGameTest.Core;
-
+using System;
 namespace MonoGameTest.Utils;
 public class Sprite : GameObject
 {
@@ -25,9 +25,13 @@ public class Sprite : GameObject
     {
         spriteIndex = new Rectangle(spriteOffsetX + spriteX * spriteSizeX, spriteOffsetY + spriteY * spriteSizeY, spriteSizeX, spriteSizeY);
     }
+    public float round(float a)
+    {
 
+        return (float)Math.Round(a) ;
+    }
     public override void draw(GameTime gameTime)
     {
-        Globals.SpriteBatch.Draw(texture, position, spriteIndex, color, rotation, Vector2.Zero, 1, SpriteEffects.None, zIndex);
+        Globals.SpriteBatch.Draw(texture, new Vector2(round(position.X), round(position.Y)), spriteIndex, color, rotation, Vector2.Zero, 1, SpriteEffects.None, zIndex);
     }
 }
